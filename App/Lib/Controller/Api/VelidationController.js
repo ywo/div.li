@@ -4,12 +4,22 @@
  */
 module.exports = Controller("Home/BaseController", function(){
   "use strict";
+  let EMAIL_REG = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/
   return {
-    indexAction: function(){
-      //render View/Home/index_index.html file
-      // this.display();
-      let a = 10;
-      this.end(a)
+    emailAction: function(){
+    	let email = this.get('email');
+    	if(EMAIL_REG.test(email)) {
+    		this.json({
+    			errcode: 0,
+    			msg : 'success'
+    		});
+    	} else {
+    		this.json({
+    			errcode: 1,
+    			msg : 'fail'
+    		});
+    	}
+
     }
   };
 });
